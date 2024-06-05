@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import './form.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-function Form() {
+function Register() {
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -106,4 +106,4 @@ function Form() {
     )
 }
 
-export default Form
+export default Register

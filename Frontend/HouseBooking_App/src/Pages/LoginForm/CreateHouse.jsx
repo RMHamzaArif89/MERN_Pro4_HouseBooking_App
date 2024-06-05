@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react'
 import './form.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-function Login() {
+function CreateCity() {
     const [values, setValues] = useState({
-        email: '',
-        password: '',
+       name:'',
+       country:'',
+       detail:'',
+       img:'',
         
     })
     const navigate = useNavigate()
@@ -31,8 +33,10 @@ function Login() {
 
       e.preventDefault();
       const formData=new FormData()
-      formData.append("email",values.email)
-      formData.append("password",values.password)
+      formData.append("name",values.name)
+      formData.append("country",values.country)
+      formData.append("img",values.img)
+      formData.append("detail",values.detail)
 
 
     try{
@@ -45,9 +49,11 @@ function Login() {
             }
             ).then(
                 setValues({
-                    email:'',
-                    password:'',
-                  
+                    name:'',
+                    country:'',
+                    detail:'',
+                    img:'',
+                     
                 })
             )
             if(res){
@@ -76,24 +82,34 @@ function Login() {
                 <form onSubmit={(e) => { handleSubmit(e) }} encType='multipart/form-data'>
                     <div class="form-row">
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="email" type="email" required />
-                            <div class="underline"></div>
-                            <label for="">Email</label>
-                        </div>
-                        <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="password" type="password" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="name" type="text" required />
                             <div class="underline"></div>
                             <label for="">Name</label>
+                        </div>
+                        <div class="input-data">
+                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="country" type="text" required />
+                            <div class="underline"></div>
+                            <label for="">Name</label>
+                        </div>
+                        <div class="input-data">
+                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="detail" type="text" required />
+                            <div class="underline"></div>
+                            <label for="">Name</label>
+                        </div>
+                        <div class="input-data">
+                            <input onChange={(e) => setValues(pre => { return { ...pre, [e.target.name]: e.target.files[0] } })} name="img" type="file" accept='image/*' required />
+                            <div class="underline"></div>
+
                         </div>
             
                    
 
                     </div>
-                    <button className="btn" type="submit">Login</button>
+                    <button className="btn" type="submit">CreateCity</button>
 
                 </form>
             </div>
         </div>
     )
 }
-export default Login
+export default CreateCity

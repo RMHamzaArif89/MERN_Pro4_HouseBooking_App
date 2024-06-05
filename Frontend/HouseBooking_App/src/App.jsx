@@ -10,22 +10,23 @@ import {
 } from "react-router-dom";
 import LayoutPage from './Pages/LayoutPage';
 import Home from './Pages/Home';
-import Form from './Pages/LoginForm/Form';
 import Login from './Pages/LoginForm/Form';
-
+import Register from './Pages/LoginForm/Register';
+import CreateCity from './Pages/LoginForm/CreateCities';
 const router = createBrowserRouter(
   createRoutesFromElements(
   <Route  element={<LayoutPage/>}>
-   <Routes>
+   
         
-        <Route index element={<Items />} />
+      
         <Route path="/" index element={<Home />} />
-        <Route path="/register"  element={<Form />} />
+        <Route path="/register"  element={<Register />} />
         <Route path="/login"  element={<Login />} />
+        <Route path="/createCity"  element={<CreateCity />} />
         
         
     
-    </Routes>
+ 
   </Route>  
 ));
 function App() {
