@@ -10,23 +10,19 @@ const Users= new mongoose.Schema({
         // required:true
 
     },
-    Country:{
+    email:{
+        type:String,
+        // required:true
+
+    },
+    password:{
         type:Number,
         // required:true
 
     },
-    img:{
-        type:String,
-        // required:true
-
-    },
-    detail:{
-        type:String,
-        // required:true
-
-    },
-    houses:{
-        type:[String],
+    isAdmin:{
+        type:Boolean,
+        default:false
     }
 
     
