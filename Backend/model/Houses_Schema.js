@@ -10,22 +10,22 @@ const Houses= new mongoose.Schema({
         // required:true
 
     },
-    Address:{
+    address:{
         type:String,
         // required:true
 
     },
-    Rooms:{
+    rooms:{
         type:Number,
         // required:true
 
     },
-    RentPerDay:{
+    rentPerDay:{
         type:Number,
         // required:true
 
     },
-    UnavailableDate:{
+    unavailableDate:{
         type:[Date],
         // required:true
 
@@ -34,9 +34,6 @@ const Houses= new mongoose.Schema({
         type:String,
         // required:true
 
-    },
-    houses:{
-        type:[String],
     },
     images:{
         type:[String],

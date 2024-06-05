@@ -37,22 +37,22 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createItems',upload.single('img'),async(req,res)=>{
+router.post('/createCities',upload.single('img'),async(req,res)=>{
 //  console.log(req.file)
    
     try{
       
-        const foodData=new food_Items({
+        const citiesData=new Cities_Schema({
             name:req.body.name,
-            price:req.body.price,
+            country:req.body.country,
             img:req.file.filename,
             detail:req.body.detail,
-            size:req.body.size
+            // houses:req.body.houses
         })
       
-       const create= await food_Items.create(foodData)
+       const create= await Cities_Schema.create(citiesData)
      if(create){
-      return   res.status(200).json({msg:'Food Item has been created',data:foodData})
+      return   res.status(200).json({msg:'Food Item has been created',data:citiesData})
      }
         
     }
@@ -69,10 +69,10 @@ router.post('/createItems',upload.single('img'),async(req,res)=>{
 
 
 //Get the data
-router.get('/foodItems',async(req,res)=>{
+router.get('/cities',async(req,res)=>{
   
  try{
-  let Data=await food_Items.find({})
+  let Data=await Cities_Schema.find({})
   if(Data){
    return  res.status(200).json({data:Data,msg:'Data has been collected from the backend'})
 
@@ -90,10 +90,10 @@ router.get('/foodItems',async(req,res)=>{
 
 
 //Get the single Data
-router.get('/foodItem/:id',async(req,res)=>{
+router.get('/cities/:id',async(req,res)=>{
  try{
   const _id=req.params.id
-  let Data=await food_Items.findById({_id})
+  let Data=await Cities_Schema.findById({_id})
   if(Data){
    return  res.status(200).json({data:Data, msg:'find the single data of required item'})
 
@@ -112,11 +112,11 @@ router.get('/foodItem/:id',async(req,res)=>{
 
 
 //Delete the data by id
-router.delete('/deleteItem/:id',async(req,res)=>{
+router.delete('/deleteCity/:id',async(req,res)=>{
  try{
   const _id=req.params.id
   
-  await food_Items.findByIdAndDelete({_id})
+  await Cities_Schema.findByIdAndDelete({_id})
   
 
    return res.status(200).json({msg:'deleted the item'})
@@ -131,11 +131,11 @@ router.delete('/deleteItem/:id',async(req,res)=>{
 
 
 //update the data by id
-router.patch('/updateItem/:id',async(req,res)=>{
+router.patch('/updateCity/:id',async(req,res)=>{
  try{
   const _id=req.params.id
   
-  await food_Items.findByIdAndUpdate(
+  await Cities_Schema.findByIdAndUpdate(
     {_id},{
     name:req.body.name,
     price:req.body.price,
