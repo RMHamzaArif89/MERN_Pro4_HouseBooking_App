@@ -37,7 +37,7 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createCities',upload.single('img'),async(req,res)=>{
+router.post('/createCity',upload.single('img'),async(req,res)=>{
 //  console.log(req.file)
    
     try{

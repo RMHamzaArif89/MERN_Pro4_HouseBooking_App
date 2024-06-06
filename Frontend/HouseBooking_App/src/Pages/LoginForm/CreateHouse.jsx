@@ -5,9 +5,12 @@ import axios from 'axios'
 function CreateCity() {
     const [values, setValues] = useState({
        name:'',
-       country:'',
+       rooms:'',
        detail:'',
-       img:'',
+       images:'',
+       unavailableDates:'',
+       rentPerDay:'',
+       address:'',
         
     })
     const navigate = useNavigate()
@@ -34,14 +37,17 @@ function CreateCity() {
       e.preventDefault();
       const formData=new FormData()
       formData.append("name",values.name)
-      formData.append("country",values.country)
-      formData.append("img",values.img)
+      formData.append("rooms",values.rooms)
+      formData.append("images",values.images)
       formData.append("detail",values.detail)
+      formData.append("address",values.address)
+      formData.append("unavailableDates",values.unavailableDates)
+      formData.append("rentPerDay",values.rentPerDay)
 
 
     try{
        const res=await axios.post(
-            "http://localhost:5000/api/createItems",
+            "http://localhost:5000/api/createHouse",
             formData,{
             headers:{
               "Content-Type":"multipart/form-data"
@@ -50,9 +56,12 @@ function CreateCity() {
             ).then(
                 setValues({
                     name:'',
-                    country:'',
+                    rooms:'',
                     detail:'',
-                    img:'',
+                    images:'',
+                    unavailableDates:'',
+                    rentPerDay:'',
+                    address:'',
                      
                 })
             )

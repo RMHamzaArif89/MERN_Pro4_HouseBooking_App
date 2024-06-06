@@ -41,7 +41,7 @@ function CreateHouse() {
 
     try{
        const res=await axios.post(
-            "http://localhost:5000/api/createItems",
+            "http://localhost:5000/api/createCity",
             formData,{
             headers:{
               "Content-Type":"multipart/form-data"
@@ -89,12 +89,12 @@ function CreateHouse() {
                         <div class="input-data">
                             <input onChange={(e) => { handleChange(e) }} value={values.name} name="country" type="text" required />
                             <div class="underline"></div>
-                            <label for="">Name</label>
+                            <label for="">Country</label>
                         </div>
                         <div class="input-data">
                             <input onChange={(e) => { handleChange(e) }} value={values.name} name="detail" type="text" required />
                             <div class="underline"></div>
-                            <label for="">Name</label>
+                            <label for="">Detail</label>
                         </div>
                         <div class="input-data">
                             <input onChange={(e) => setValues(pre => { return { ...pre, [e.target.name]: e.target.files[0] } })} name="img" type="file" accept='image/*' required />

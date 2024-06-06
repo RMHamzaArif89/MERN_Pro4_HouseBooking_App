@@ -37,7 +37,7 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createUsers',upload.single('img'),async(req,res)=>{
+router.post('/createUser',async(req,res)=>{
 //  console.log(req.file)
    
     try{
@@ -51,7 +51,7 @@ router.post('/createUsers',upload.single('img'),async(req,res)=>{
       
        const create= await Users_Schema.create(userData)
      if(create){
-      return   res.status(200).json({msg:'Food Item has been created',data:foodData})
+      return   res.status(200).json({msg:'Food Item has been created',data:userData})
      }
         
     }
@@ -89,7 +89,7 @@ router.get('/users',async(req,res)=>{
 
 
 //Get the single Data
-router.get('/users/:id',async(req,res)=>{
+router.get('/user/:id',async(req,res)=>{
  try{
   const _id=req.params.id
   let Data=await Users_Schema.findById({_id})

@@ -37,7 +37,7 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createHouses',upload.single('img'),async(req,res)=>{
+router.post('/createHouse',upload.single('img'),async(req,res)=>{
 //  console.log(req.file)
    
     try{
@@ -92,7 +92,7 @@ router.get('/houses',async(req,res)=>{
 
 
 //Get the single Data
-router.get('/houses/:id',async(req,res)=>{
+router.get('/house/:id',async(req,res)=>{
  try{
   const _id=req.params.id
   let Data=await House_Schema.findById({_id})

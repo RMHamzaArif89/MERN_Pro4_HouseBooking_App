@@ -43,20 +43,21 @@ function Register() {
             "http://localhost:5000/api/createUser",
             formData,{
             headers:{
-              "Content-Type":"multipart/form-data"
+            "Content-Type":"application/json"
             }
             }
             ).then(
+                
                 setValues({
                     name:'',
                     email:'',
                     password:'',
                 
                 })
-            )
-            if(res){
-                navigate('/')
-            }
+            ).then(
+                navigate('/users')
+            ).catch(console.log('err'))
+          
 
 
 
@@ -85,12 +86,12 @@ function Register() {
                             <label for="">Name</label>
                         </div>
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="email" type="email" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.email} name="email" type="email" required />
                             <div class="underline"></div>
                             <label for="">Email</label>
                         </div>
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="password" type="password" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.password} name="password" type="password" required />
                             <div class="underline"></div>
                             <label for="">Password</label>
                         </div>
@@ -98,7 +99,7 @@ function Register() {
                    
 
                     </div>
-                    <button className="btn" type="submit">Sign In</button>
+                    <button className="btn" type="submit">Register</button>
 
                 </form>
             </div>
