@@ -39,9 +39,7 @@ const upload = multer({ storage:Storage })
 
 router.post('/createHouse',upload.array("images",6),async(req,res)=>{
 
-console.log(req.files[0].filename)
-// console.log(req.file)
-console.log(req.body.name)
+
    
     try{
 
@@ -49,7 +47,9 @@ console.log(req.body.name)
         const houses=new House_Schema({
             name:req.body.name,
             address:req.body.address,
-            images:req.files.filename,
+            images:req.files.map((file)=>{
+              return (file.filename)
+            }),
             rooms:req.body.rooms,
             // UnavailableDates:req.body.UnavailableDate,
             detail:req.body.detail,

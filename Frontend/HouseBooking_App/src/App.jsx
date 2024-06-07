@@ -16,8 +16,10 @@ import Login from './Pages/LoginForm/Form';
 import Register from './Pages/LoginForm/Register';
 import CreateCity from './Pages/LoginForm/CreateCities';
 import { UserLoader } from './Pages/Users';
+
 import Users from './Pages/Users';
 import CreateHouse from './Pages/LoginForm/CreateHouse'
+import Houses,{HouseLoader} from './Pages/Houses';
 
 
 
@@ -33,6 +35,7 @@ const router = createBrowserRouter(
         <Route path="/createCity"  element={<CreateCity />} />
         <Route path="/createHouse"  element={<CreateHouse />} />
         <Route path="/users" element={<Users />} loader={UserLoader} />
+        <Route path="/houses" element={<Houses />} loader={HouseLoader} />
         
         
     

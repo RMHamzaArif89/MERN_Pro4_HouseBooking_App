@@ -87,12 +87,12 @@ function CreateCity() {
                             <label for="">Name</label>
                         </div>
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="country" type="text" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.country} name="country" type="text" required />
                             <div class="underline"></div>
                             <label for="">Country</label>
                         </div>
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="detail" type="text" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.detail} name="detail" type="text" required />
                             <div class="underline"></div>
                             <label for="">Detail</label>
                         </div>
