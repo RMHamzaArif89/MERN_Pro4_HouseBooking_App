@@ -56,8 +56,9 @@ function CreateCity() {
                      
                 })
             )
+            console.log(res)
             if(res){
-                navigate('/')
+                navigate('/Cities')
             }
 
 
@@ -91,6 +92,8 @@ function CreateCity() {
                             <div class="underline"></div>
                             <label for="">Country</label>
                         </div>
+                     </div>   
+                    <div className="form-row">
                         <div class="input-data">
                             <input onChange={(e) => { handleChange(e) }} value={values.detail} name="detail" type="text" required />
                             <div class="underline"></div>
