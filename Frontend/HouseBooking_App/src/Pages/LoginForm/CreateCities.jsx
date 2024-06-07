@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import './form.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-function CreateHouse() {
+function CreateCity() {
     const [values, setValues] = useState({
        name:'',
        country:'',
@@ -98,18 +98,18 @@ function CreateHouse() {
                         </div>
                         <div class="input-data">
                             <input onChange={(e) => setValues(pre => { return { ...pre, [e.target.name]: e.target.files[0] } })} name="img" type="file" accept='image/*' required />
-                            <div class="underline"></div>
+                        <div class="underline"></div>
 
                         </div>
             
                    
 
                     </div>
-                    <button className="btn" type="submit">CreateHouse</button>
+                    <button className="btn" type="submit">CreateCity</button>
 
                 </form>
             </div>
         </div>
     )
 }
-export default CreateHouse
+export default CreateCity

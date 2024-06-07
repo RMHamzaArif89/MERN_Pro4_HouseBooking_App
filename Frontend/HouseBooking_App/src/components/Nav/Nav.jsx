@@ -19,7 +19,8 @@ function Nav() {
             <li><NavLink  className="navlink" to="/cities">Cities</NavLink></li>
             <li><NavLink  className="navlink" to="/houses">Houses</NavLink></li>
             <li><NavLink  className="navlink" to="/users">Users</NavLink></li>
-            <li><NavLink className='navlink' to="/addCities">AddCity</NavLink></li>
+            <li><NavLink className='navlink' to="/createCity">AddCity</NavLink></li>
+            <li><NavLink className='navlink' to="/createHouse">AddHouse</NavLink></li>
             <li><NavLink className='navlink' to="/register">Register</NavLink></li>
             <li><NavLink className='navlink' to="/login">Login</NavLink></li>
             

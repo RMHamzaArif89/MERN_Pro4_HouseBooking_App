@@ -37,10 +37,10 @@ function Login() {
 
     try{
        const res=await axios.post(
-            "http://localhost:5000/api/createItems",
+            "http://localhost:5000/api/loginUser",
             formData,{
             headers:{
-              "Content-Type":"multipart/form-data"
+              "Content-Type":"application/json"
             }
             }
             ).then(
@@ -50,9 +50,11 @@ function Login() {
                   
                 })
             )
-            if(res){
-                navigate('/')
-            }
+            console.log(res.statusText)
+                if(res.statusText=='OK'){
+                    navigate('/users')
+                }
+            
 
 
 
@@ -76,14 +78,14 @@ function Login() {
                 <form onSubmit={(e) => { handleSubmit(e) }} encType='multipart/form-data'>
                     <div class="form-row">
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="email" type="email" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.email} name="email" type="email" required />
                             <div class="underline"></div>
                             <label for="">Email</label>
                         </div>
                         <div class="input-data">
-                            <input onChange={(e) => { handleChange(e) }} value={values.name} name="password" type="password" required />
+                            <input onChange={(e) => { handleChange(e) }} value={values.password} name="password" type="password" required />
                             <div class="underline"></div>
-                            <label for="">Name</label>
+                            <label for="">Passsword</label>
                         </div>
             
                    

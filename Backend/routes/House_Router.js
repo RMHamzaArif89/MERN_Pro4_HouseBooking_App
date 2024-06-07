@@ -37,20 +37,25 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createHouse',upload.single('img'),async(req,res)=>{
-//  console.log(req.file)
+router.post('/createHouse',upload.array("images",6),async(req,res)=>{
+
+console.log(req.files[0].filename)
+// console.log(req.file)
+console.log(req.body.name)
    
     try{
+
       
         const houses=new House_Schema({
             name:req.body.name,
             address:req.body.address,
-            images:req.file.filename,
+            images:req.files.filename,
             rooms:req.body.rooms,
-            UnavailableDate:req.body.UnavailableDate,
+            // UnavailableDates:req.body.UnavailableDate,
             detail:req.body.detail,
             rentPerDay:req.body.rentPerDay,
         })
+        
       
        const create= await House_Schema.create(houses)
      if(create){

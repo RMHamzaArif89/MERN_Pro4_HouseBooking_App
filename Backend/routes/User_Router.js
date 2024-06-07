@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router()
 const Users_Schema=require('../model/User_Schema')
 const bodyParser=require('body-parser')
-
+const bcrypt=require('bcryptjs')
 const multer=require('multer')
 const path=require('path')
 
@@ -64,11 +64,39 @@ router.post('/createUser',async(req,res)=>{
 
 
 
+router.post('/loginUser',async(req,res)=>{
+//  console.log(req.file)
+   
+    try{
+      
+       const password=req.body.password
+       const email=req.body.email
+       const findUser= await Users_Schema.findOne({email})
+       const passwordMatch= await bcrypt.compare(password,findUser.password)
+ 
+     if(passwordMatch && findUser){
+      // console.log('ok')
+      return res.status(200).json({msg:'find the user u r login'})
+      
+     }else{
+      console.log('not ok')
+     }
+        
+    }
+   
+    catch(err){
+    return  res.status(400).json({msg:'could not find the connection || data is wrong'})
+    }
+})
+
+
+
+
 
 
 
 //Get the data
-router.get('/users',async(req,res)=>{
+router.get('/Users',async(req,res)=>{
   
  try{
   let Data=await Users_Schema.find({})

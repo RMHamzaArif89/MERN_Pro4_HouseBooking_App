@@ -1,7 +1,8 @@
 //this collection will be use to find filter or search the products|data ...
 require('dotenv').config()
 const mongoose=require('mongoose')
-
+const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken')
 
 const Users= new mongoose.Schema({
     //these are the names of input...name='name'
@@ -29,6 +30,36 @@ const Users= new mongoose.Schema({
 
 })
 
+//hash password using bcrypt
+Users.pre("save", async function(next){
+    if(this.isModified('password')){
+        this.password= await bcrypt.hash(this.password,10)
+        // console.log(this.password)
+    }
+    next()
+})
+
+
+
+
+
+//jsonwebtokengenerate
+Users.methods.generateToken=async function(){
+    try{
+        // if(this.include(token)){
+        //     return 
+        // }
+        const token=jwt.sign({_id:this._id},process.env.SECRET_KEY,{expiresIn:'60s'})
+        
+        // this.tokens=this.tokens.concat({token})
+        // await this.save()
+        return token
+        
+    
+    } catch{
+res.send('error occur')
+    }
+}
 
 
 
