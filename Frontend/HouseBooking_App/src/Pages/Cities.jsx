@@ -1,33 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
+import './css/cities.css'
+
 
 function Cities() {
-    const cities=useLoaderData()
-   
+  const cities = useLoaderData()
+  const [search,setSearch]=useState('')
+CityLoader(search)
 
   return (
     <>
-    {/* {
+      {/* {
         isloading&&<div>...loading</div>
     }
     {
         isError&&<div>{isError}</div>
 } */}
-{
-  cities.map((city)=>{
-    return(
-      <div key={city._id}>
-           <div className="name">{city.name}</div>
-           <div className="addrss">{city.detail}</div>
-           <div className="rooms">{city.country}</div>
-           <div className="images">
-{city.img}
-           </div>
+      <div className="cities">
+        <div className="cities-heading">
+          <div className="cities-h1">
+            Out Network in Differnet Cities
+          </div>
+          <input type="search" name="search" placeholder='search city' value={search} className='cities-input' onChange={(e)=>{setSearch(e.target.value)}}/>
         </div>
-    )
-  })
-        
-}
+        <div className="cities-container">
+
+          {
+            cities.map((city) =>
+              <div className="cities-card">
+                 <img className="cities-img" src={'http://localhost:5000/' + city.img} />
+               <div className="card-text">
+               <div className="name">{city.name}</div>
+                <div className="country">{city.country}</div>
+                <div className="detail">{city.detail}</div>
+                <div className="houses">Available Houses</div>
+               </div>
+              </div>
+            )
+          }
+
+        </div>
+      </div>
     </>
   )
 }
@@ -37,17 +50,17 @@ export default Cities
 
 
 
-    //get orders data
-  export const CityLoader=async()=>{
+//get orders data
+export const CityLoader = async (search) => {
 
-      const response=await fetch('http://localhost:5000/api/Cities',{
-        method:'GET',
-    
-    })
-    const res=await response.json()
-    if(response.ok){
-      return res.data
-      
-    }
- 
+  const response = await fetch(`http://localhost:5000/api/Cities?search=${search}`, {
+    method: 'GET',
+
+  })
+  const res = await response.json()
+  if (response.ok) {
+    return res.data
+
   }
+
+}

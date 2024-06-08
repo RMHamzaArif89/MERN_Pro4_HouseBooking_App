@@ -1,6 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const House_Schema=require('../model/Houses_Schema')
+const City_Schema=require('../model/Cities_Schema')
 const bodyParser=require('body-parser')
 
 const multer=require('multer')
@@ -43,6 +44,7 @@ router.post('/createHouse',upload.array("images",6),async(req,res)=>{
    
     try{
 
+
       
         const houses=new House_Schema({
             name:req.body.name,
@@ -54,11 +56,21 @@ router.post('/createHouse',upload.array("images",6),async(req,res)=>{
             // UnavailableDates:req.body.UnavailableDate,
             detail:req.body.detail,
             rentPerDay:req.body.rentPerDay,
+            city:req.body.city
         })
+     
+      
+       const createHouse= await House_Schema.create(houses)
+       
+      
+      
         
       
-       const create= await House_Schema.create(houses)
-     if(create){
+  
+     if(createHouse){
+      await City_Schema.findOneAndUpdate({name:req.body.city},{
+        $push:{houses:createHouse._id}
+      })
       return   res.status(200).json({msg:'Food Item has been created',data:houses})
      }
         
