@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState , useContext ,useEffect} from 'react'
 import { useLoaderData } from 'react-router-dom'
 import './css/cities.css'
+import CityContext from '../../../Context/CityContext'
 
 
 function Cities() {
-  const cities = useLoaderData()
+  const {citiesData,getCities} = useContext(CityContext)
   const [search,setSearch]=useState('')
-CityLoader(search)
+  useEffect(()=>{
+     getCities(search)
+  },[search])
+
 
   return (
     <>
@@ -26,7 +30,7 @@ CityLoader(search)
         <div className="cities-container">
 
           {
-            cities.map((city) =>
+            citiesData.map((city) =>
               <div className="cities-card">
                  <img className="cities-img" src={'http://localhost:5000/' + city.img} />
                <div className="card-text">
@@ -50,17 +54,4 @@ export default Cities
 
 
 
-//get orders data
-export const CityLoader = async (search) => {
 
-  const response = await fetch(`http://localhost:5000/api/Cities?search=${search}`, {
-    method: 'GET',
-
-  })
-  const res = await response.json()
-  if (response.ok) {
-    return res.data
-
-  }
-
-}

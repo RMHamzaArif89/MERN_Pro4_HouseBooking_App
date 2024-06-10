@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(140deg,silver,skyblue);
 }
 .cities-heading{
     width: 100%;
@@ -26,9 +27,9 @@
     outline: none;
     border: none;
     font-size: 1rem;
-    color: blue;
+    color: rgb(0, 208, 255);
     font-family: serif;
-    background:lightblue;
+    background:rgb(35, 149, 186);
 }
 .cities-input:focus{
     border: 1px solid gray;

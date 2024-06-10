@@ -19,8 +19,8 @@ import { UserLoader } from './Pages/Users';
 
 import Users from './Pages/Users';
 import CreateHouse from './Pages/LoginForm/CreateHouse'
-import Houses,{HouseLoader} from './Pages/Houses';
-import Cities,{CityLoader} from './Pages/Cities';
+import Houses from './Pages/Houses';
+import Cities from './Pages/Cities';
 
 
 
@@ -36,8 +36,8 @@ const router = createBrowserRouter(
         <Route path="/createCity"  element={<CreateCity />} />
         <Route path="/createHouse"  element={<CreateHouse />} />
         <Route path="/users" element={<Users />} loader={UserLoader} />
-        <Route path="/houses" element={<Houses />} loader={HouseLoader} />
-        <Route path="/cities" element={<Cities />} loader={CityLoader} />
+        <Route path="/houses" element={<Houses />} />
+        <Route path="/cities" element={<Cities />} />
         
         
     

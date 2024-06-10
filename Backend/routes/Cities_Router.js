@@ -70,24 +70,25 @@ router.post('/createCity',upload.single('img'),async(req,res)=>{
 
 //Get the data
 router.get('/cities',async(req,res)=>{
-  // console.log(req.query.search)
- const search=req.query.search || ''
-  const query={
-    name:{$regex:search,$options:'i'}
+  
+  const search=req.query.search || ''
+  
+  let searchQuery={}
+  if(search !='' && search!= 'undefined'){
+    searchQuery={name:{$regex:search,$options:'i'}}
   }
- try{
-  let Data=await Cities_Schema.find(query)
+ 
   
  
-if(Data){
-  // console.log(Data)
-  return  res.status(200).json({data:Data,msg:'Data has been collected from the backend'})
-}else{
-  return res.status(400).json({msg:'data not found || wrong inoformation given'})
-}
+ try{
+  let Data=await Cities_Schema.find(searchQuery)
+  if(Data){
+   return  res.status(200).json({data:Data,msg:'Data has been collected from the backend'})
 
- 
+  }
 
+    return res.status(400).json({msg:'data not found || wrong inoformation given'})
+  
  }
  catch(e){
   res.status(400).json({msg:'could not process the request'})

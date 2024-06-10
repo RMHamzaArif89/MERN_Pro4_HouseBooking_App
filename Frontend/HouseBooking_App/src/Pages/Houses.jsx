@@ -1,11 +1,17 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useEffect } from 'react'
+import {useState,useContext} from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { Link ,useNavigate} from 'react-router-dom'
 import './css/houses.css'
+import HouseContext from '../../../Context/HouseContext'
 
 function Houses() {
-  const houses = useLoaderData()
+const {getHouses,housesData}=useContext(HouseContext)
+
+
+  useEffect(()=>{
+
+  },[])
 
 
   const [values, setValues] = useState({
@@ -81,7 +87,9 @@ const handleSubmit = async (e) => {
 } */}
       <div className="houses-container">
         <div className="houses-con-left">
+          
           <form onSubmit={handleSubmit} className="houses-form">
+          <div className="form-heading">Find Your Dream House</div>
             <div className="form-row">
               <div className="input-data">
                 <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" required />
@@ -111,18 +119,31 @@ const handleSubmit = async (e) => {
           <div className="submit-btn" type="submit">Sort</div>
 
           </form>
+
+          <div className="houses-offer">
+            <div className="h1">Special Offer</div>
+            <div className="h2">On All the Houses</div>
+            <div className="offer">30% Off</div>
+            <div className="time">30Days left</div>
+          </div>
         </div>
       
       <div className="houses-con-right">
         <div className="houses-card-con">
           {
-            houses.map((house) => {
+            housesData.map((house) => {
               return (
                 <div className='houses-card' key={house._id}>
-                  <div className="houses-name">{house.name} House🏠</div>
-                  <div className="houses-rooms">Rooms:{house.rooms}</div>
+                  
                   <img src={'http://localhost:5000/' + house.images[0]} alt="" className="houses-img" />
-                  <Link rel="stylesheet" to={`/HouseDetail/:${house._id}`} className='houses-detail' >Detail</Link>
+                <div className="houses-detail">
+                  <div className="houses-rooms">Rooms:{house.rooms}</div>
+                  <div className="houses-price">Price:{house.rentPerDay}$</div>
+                  <div className="houses-city">City:{house.city}</div>
+                  <div className="houses-address">Address:{house.address}</div>
+                  
+                </div>
+                  <Link rel="stylesheet" to={`/HouseDetail/:${house._id}`} className='houses-moreDetail-btn' >More Detail</Link>
                 </div>
               )
             })
@@ -150,16 +171,3 @@ export default Houses
 
 
 //get orders data
-export const HouseLoader = async () => {
-
-  const response = await fetch('http://localhost:5000/api/Houses', {
-    method: 'GET',
-
-  })
-  const res = await response.json()
-  if (response.ok) {
-    return res.data
-
-  }
-
-}

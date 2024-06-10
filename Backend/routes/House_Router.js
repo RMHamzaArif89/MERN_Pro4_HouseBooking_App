@@ -86,7 +86,6 @@ router.post('/createHouse',upload.array("images",6),async(req,res)=>{
 
 
 
-
 //Get the data
 router.get('/houses',async(req,res)=>{
   
