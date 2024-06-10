@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
-import { useLoaderData,useNavigate } from 'react-router-dom'
-import { Link, useNavigate } from 'react-router-dom'
+import { useLoaderData,useNavigate,Link } from 'react-router-dom'
 import './css/houses.css'
 import axios from 'axios'
-import HouseContext from '../../../Context/HouseContext'
+import HouseContext from '../../Context/HouseContext.jsx'
 
 
 
 function Houses() {
   const { getHouses, housesData ,setHousesData} = useContext(HouseContext)
-  navigate=useNavigate()
-
+ 
 
   useEffect(() => {
 
@@ -24,7 +22,7 @@ function Houses() {
     city: '',
 
   })
-  const navigate = useNavigate()
+  
 
   const handleChange = (e) => {
 
@@ -99,7 +97,7 @@ try{
 
             <div className="form-row">
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" />
+                <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" required/>
                 <div className="underline"></div>
                 <label for="">City Location</label>
               </div>
@@ -135,8 +133,9 @@ try{
                       <div className="houses-price">Price:{house.rentPerDay}$</div>
                       <div className="houses-city">City:{house.city}</div>
                       <div className="houses-address">Address:{house.address}</div>
-                      <div className="houses-detail" onClick={navigate(`/houseDetail/:${house_id}`)}>More Detail</div>
+                    
                     </div>
+                    <Link to={`/houseDetail/${house._id}`} className='houses-moreDetail-btn'>More Detail</Link>
                    
                   </div>
                 )

@@ -88,7 +88,7 @@ router.post('/createHouse',upload.array("images",6),async(req,res)=>{
 
 //Get the data
 router.get('/houses',async(req,res)=>{
-  console.log('sort')
+
   
  try{
   const max_price=req.query.price
@@ -123,10 +123,12 @@ router.get('/houses',async(req,res)=>{
 
 //Get the single Data
 router.get('/house/:id',async(req,res)=>{
+  console.log('single house Data')
  try{
   const _id=req.params.id
   let Data=await House_Schema.findById({_id})
   if(Data){
+    
    return  res.status(200).json({data:Data, msg:'find the single data of required item'})
 
   }

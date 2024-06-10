@@ -1,7 +1,7 @@
 import React, { useState , useContext ,useEffect} from 'react'
 import { useLoaderData } from 'react-router-dom'
 import './css/cities.css'
-import CityContext from '../../../Context/CityContext'
+import CityContext from '../../Context/CityContext'
 
 
 function Cities() {
