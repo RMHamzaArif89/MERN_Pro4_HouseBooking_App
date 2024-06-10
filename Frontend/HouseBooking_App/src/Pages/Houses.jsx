@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react'
-import {useState,useContext} from 'react'
-import { useLoaderData } from 'react-router-dom'
-import { Link ,useNavigate} from 'react-router-dom'
+import { useState, useContext } from 'react'
+import { useLoaderData,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './css/houses.css'
+import axios from 'axios'
 import HouseContext from '../../../Context/HouseContext'
 
+
+
 function Houses() {
-const {getHouses,housesData}=useContext(HouseContext)
+  const { getHouses, housesData ,setHousesData} = useContext(HouseContext)
+  navigate=useNavigate()
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[])
+  }, [])
 
 
   const [values, setValues] = useState({
     max_rooms: '',
     max_price: '',
-    city:'',
+    city: '',
 
-})
-const navigate = useNavigate()
+  })
+  const navigate = useNavigate()
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
 
     // e.preventDefault()
 
@@ -31,52 +35,42 @@ const handleChange = (e) => {
 
     setValues((pre) =>
     ({
-        ...pre, [name]: val
+      ...pre, [name]: val
     }
     )
     )
-    
 
-}
 
-const handleSubmit = async (e) => {
+  }
+
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    try {
-        
-        const res = await axios.get(
-            "http://localhost:5000/api/houses",
-            {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        }
-        ).then(
-            setValues({
-                max_rooms: '',
-                max_price: '',
-                city:''
+    
+   
+try{
+  
+  const response = await fetch( `http://localhost:5000/api/houses?rooms=${values.max_rooms}&price=${values.max_price}&city=${values.city}`, {
+    method: 'GET',
 
-            })
-        )
-        console.log(res)
-        if (res.statusText == 'OK') {
-            navigate('/Houses')
-        }
+  })
+  const res = await response.json()
+  if (response.ok) {
+    setHousesData(res.data)
+    
+ 
 
+  }else{
+    console.log('false')
+  }
 
-
-
-
-    }
-    catch (err) {
-        console.log(err)
-    }
-
+}catch(e){
+  console.log(e)
 }
-
-
+}
+    
+  
   return (
     <>
       {/* {
@@ -87,36 +81,36 @@ const handleSubmit = async (e) => {
 } */}
       <div className="houses-container">
         <div className="houses-con-left">
-          
-          <form onSubmit={handleSubmit} className="houses-form">
-          <div className="form-heading">Find Your Dream House</div>
+
+          <form onSubmit={(e) => { handleSubmit(e) }} className="houses-form">
+            <div className="form-heading">Find Your Dream House</div>
             <div className="form-row">
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" required />
+                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" />
                 <div className="underline"></div>
                 <label for="">MaximumpPrice</label>
               </div>
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number" required />
+                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number"  />
                 <div className="underline"></div>
                 <label for="">Maximum Rooms</label>
               </div>
             </div>
-           
-          <div className="form-row">
-          <div className="input-data">
-              <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" required />
-              <div className="underline"></div>
-              <label for="">City Location</label>
-            </div>
-            <div className="input-data">
-              <input onChange={(e) => { handleChange(e) }} disabledvalue={''} name="max-rooms" type="number" required />
-              <div className="underline"></div>
-              <label for="">Persons</label>
-            </div>
 
-          </div>
-          <div className="submit-btn" type="submit">Sort</div>
+            <div className="form-row">
+              <div className="input-data">
+                <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" />
+                <div className="underline"></div>
+                <label for="">City Location</label>
+              </div>
+              <div className="input-data">
+                <input onChange={(e) => { handleChange(e) }} value={''} name="persons" type="number" />
+                <div className="underline"></div>
+                <label for="">Persons</label>
+              </div>
+
+            </div>
+            <button className="submit-btn" type="submit">Sort</button>
 
           </form>
 
@@ -127,40 +121,40 @@ const handleSubmit = async (e) => {
             <div className="time">30Days left</div>
           </div>
         </div>
-      
-      <div className="houses-con-right">
-        <div className="houses-card-con">
-          {
-            housesData.map((house) => {
-              return (
-                <div className='houses-card' key={house._id}>
-                  
-                  <img src={'http://localhost:5000/' + house.images[0]} alt="" className="houses-img" />
-                <div className="houses-detail">
-                  <div className="houses-rooms">Rooms:{house.rooms}</div>
-                  <div className="houses-price">Price:{house.rentPerDay}$</div>
-                  <div className="houses-city">City:{house.city}</div>
-                  <div className="houses-address">Address:{house.address}</div>
-                  
-                </div>
-                  <Link rel="stylesheet" to={`/HouseDetail/:${house._id}`} className='houses-moreDetail-btn' >More Detail</Link>
-                </div>
-              )
-            })
-            // <div className="houses-images">
-            // {
-            //     house.images.map((img)=>{
-            //         return <div className="houses-img">{img}</div>
-            //     })
-            // }
-            //            </div>
 
-          }
+        <div className="houses-con-right">
+          <div className="houses-card-con">
+            {
+              housesData.map((house) => {
+                return (
+                  <div className='houses-card' key={house._id}>
+
+                    <img src={'http://localhost:5000/' + house.images[0]} alt="" className="houses-img" />
+                    <div className="houses-detail">
+                      <div className="houses-rooms">Rooms:{house.rooms}</div>
+                      <div className="houses-price">Price:{house.rentPerDay}$</div>
+                      <div className="houses-city">City:{house.city}</div>
+                      <div className="houses-address">Address:{house.address}</div>
+                      <div className="houses-detail" onClick={navigate(`/houseDetail/:${house_id}`)}>More Detail</div>
+                    </div>
+                   
+                  </div>
+                )
+              })
+              // <div className="houses-images">
+              // {
+              //     house.images.map((img)=>{
+              //         return <div className="houses-img">{img}</div>
+              //     })
+              // }
+              //            </div>
+
+            }
 
 
+          </div>
         </div>
-      </div>
-    </div >
+      </div >
     </>
   )
 }

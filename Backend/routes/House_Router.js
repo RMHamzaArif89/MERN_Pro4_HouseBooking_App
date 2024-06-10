@@ -88,9 +88,23 @@ router.post('/createHouse',upload.array("images",6),async(req,res)=>{
 
 //Get the data
 router.get('/houses',async(req,res)=>{
+  console.log('sort')
   
  try{
-  let Data=await House_Schema.find({})
+  const max_price=req.query.price
+  const findCity=req.query.city
+  const max_rooms=req.query.rooms
+  // const sortData={price:{$lt:max_price},city:{city:findCity},max_rooms:{rooms:{$lt:max_rooms}}}
+  // console.log(max_price,find,max_rooms)
+  let getData
+    getData=await House_Schema.find({})
+  if(findCity || max_price || max_rooms){
+     getData=await House_Schema.find({city:findCity,rentPerDay: {$lte: max_price || 999999},rooms:{$lte:max_rooms || 999}})
+    console.log(getData)
+    console.log('city')
+  }
+  
+  let Data=getData
   if(Data){
    return  res.status(200).json({data:Data,msg:'Data has been collected from the backend'})
 

@@ -31,7 +31,7 @@ const getHouses = async (search) => {
 
 
   return(
-    <HouseContext.Provider value={{housesData,getHouses}}>
+    <HouseContext.Provider value={{housesData,getHouses,setHousesData}}>
     {children}
 </HouseContext.Provider>
   )
