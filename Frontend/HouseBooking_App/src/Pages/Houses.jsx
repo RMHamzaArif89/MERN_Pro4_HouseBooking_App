@@ -84,12 +84,12 @@ try{
             <div className="form-heading">Find Your Dream House</div>
             <div className="form-row">
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" />
+                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" required/>
                 <div className="underline"></div>
                 <label for="">MaximumpPrice</label>
               </div>
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number"  />
+                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number"  required/>
                 <div className="underline"></div>
                 <label for="">Maximum Rooms</label>
               </div>

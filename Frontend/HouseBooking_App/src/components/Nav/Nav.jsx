@@ -12,7 +12,7 @@ function Nav() {
     <div className='nav'>
      
    
-      <img src="/images/logo1.jpg" className="logo-img" alt="" />
+      <img src="/images/logo.jpg" className="logo-img" alt="" />
     
         <ul>
             <li><NavLink  className="navlink" to="/">Home</NavLink><FcHome/></li>
