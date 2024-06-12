@@ -5,8 +5,8 @@ import { GiFamilyHouse } from "react-icons/gi";
 import { BiSolidDetail } from "react-icons/bi";
 import { IoMdPricetags } from "react-icons/io";
 
-function HouseDetailCom({Data}) {
-    let [show,setShow]=useState(false)
+function HouseDetailCom({Data,setModal}) {
+   let[show,setShow]=useState()
   return (
     <div className="houseDetail-con">
     <div className="house-item house-name">{Data.name} House <GiFamilyHouse/> </div>
@@ -14,8 +14,9 @@ function HouseDetailCom({Data}) {
     <div className="house-item house-price">{Data.rentPerDay}$ RentPerDay <IoMdPricetags/> </div>
     <div className="house-img">
       <img src={'http://localhost:5000/' + Data.images[0]} alt="" className="house-imgOne" />
-     <MdMore className='more-images-icon' onMouseLeave={()=>{setShow(false)}} onMouseEnter={()=>{setShow(true)}}/>
-     <div className={show?'display-show show-more':'show-more'}>Show More</div>
+     <MdMore className='more-images-icon' onClick={setModal} onMouseLeave={()=>{setShow(false)}} onMouseEnter={()=>{setShow(true)}}/>
+     <div className={show?'display-show show-more':'show-more'}
+    >Show More</div>
      <div className="house-rooms">{Data.rooms} Rooms</div>
 
     </div>
