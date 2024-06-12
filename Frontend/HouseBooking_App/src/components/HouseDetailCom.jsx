@@ -14,7 +14,7 @@ function HouseDetailCom({Data,setModal}) {
     <div className="house-item house-price">{Data.rentPerDay}$ RentPerDay <IoMdPricetags/> </div>
     <div className="house-img">
       <img src={'http://localhost:5000/' + Data.images[0]} alt="" className="house-imgOne" />
-     <MdMore className='more-images-icon' onClick={setModal} onMouseLeave={()=>{setShow(false)}} onMouseEnter={()=>{setShow(true)}}/>
+     <MdMore className='more-images-icon' onClick={()=>{setModal((pre)=>!pre)}} onMouseLeave={()=>{setShow((pre)=>!pre)}} onMouseEnter={()=>{setShow(true)}}/>
      <div className={show?'display-show show-more':'show-more'}
     >Show More</div>
      <div className="house-rooms">{Data.rooms} Rooms</div>

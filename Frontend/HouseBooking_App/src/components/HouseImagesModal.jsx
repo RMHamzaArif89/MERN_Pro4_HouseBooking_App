@@ -1,9 +1,12 @@
 import React from 'react'
+import { ImCross } from "react-icons/im";
 
-function HouseImagesModal({images}) {
+
+function HouseImagesModal({images,setShowImagesModal}) {
   
   return (
     <div className='ImagesModal'>
+      <div className="cross-modal" onClick={()=>{setShowImagesModal((pre)=>!pre)}}><ImCross/></div>
       
       {
 images&& images.map((img)=>{
