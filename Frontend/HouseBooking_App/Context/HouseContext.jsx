@@ -7,6 +7,7 @@ const HouseContext = createContext(null);
 export const HouseContextProvider=({children})=>{
 const [housesData,setHousesData]=useState([])
 const [singleHouseData,setSingleHouseData]=useState()
+const [showBooking,setShowBooking]=useState(false)
     
 //get orders data
 const getHouses = async (search) => {
@@ -53,7 +54,8 @@ const getHouses = async (search) => {
 
 
   return(
-    <HouseContext.Provider value={{housesData,getHouses,setHousesData,getHouseDataById,singleHouseData}}>
+    <HouseContext.Provider value={{housesData,getHouses,setHousesData,getHouseDataById,singleHouseData
+      ,setShowBooking,showBooking}}>
     {children}
 </HouseContext.Provider>
   )

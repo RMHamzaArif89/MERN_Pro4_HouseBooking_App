@@ -6,12 +6,15 @@ import { useContext , useState } from 'react'
 import HouseContext from '../../Context/HouseContext';
 import HouseDetailCom from '../components/HouseDetailCom';
 import HouseImagesModal from '../components/HouseImagesModal';
+import BookHouse_Comp from '../components/HouseBook/BookHouse_Comp'
+import { FaHome } from "react-icons/fa";
 
 function HouseDetail() {
     const {id} = useParams()
-    const {getHouseDataById,singleHouseData}=useContext(HouseContext)
+    const {getHouseDataById,singleHouseData,showBooking,setShowBooking}=useContext(HouseContext)
     const [showImagesModal,setShowImagesModal]=useState(false)
     useEffect(()=>{
+
         getHouseDataById(id)
         
     },[id])
@@ -20,6 +23,12 @@ function HouseDetail() {
     
   return (
    <div className={showImagesModal?"houseDetail houseDetail-opacity":"houseDetail"}>
+    <div className="houseBookingBtn" onClick={()=>{setShowBooking((pre)=>!pre)}}>
+      Book Now <FaHome/>
+    </div>
+    {
+      showBooking && <BookHouse_Comp/>
+    }
     {
       showImagesModal&& ReactDom.createPortal(
         <HouseImagesModal images={singleHouseData.images} setShowImagesModal={setShowImagesModal}/>,
