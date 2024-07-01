@@ -7,6 +7,7 @@ const bodyParser=require('body-parser')
 const multer=require('multer')
 const path=require('path')
 
+const authUser=require('../authUser')
 
 
 //this is middleWare use to encode the form&body request value //example req.body from form
@@ -33,7 +34,7 @@ const Storage = multer.diskStorage({
 const upload = multer({ storage:Storage })
 
 
-
+router.use(authUser)
 
 
 

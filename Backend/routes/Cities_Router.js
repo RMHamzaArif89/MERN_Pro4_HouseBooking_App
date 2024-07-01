@@ -6,6 +6,9 @@ const bodyParser=require('body-parser')
 const multer=require('multer')
 const path=require('path')
 
+const authUser=require('../authUser')
+
+
 
 
 //this is middleWare use to encode the form&body request value //example req.body from form
@@ -33,8 +36,8 @@ const upload = multer({ storage:Storage })
 
 
 
-
-
+//authUser
+router.use(authUser)
 
 
 router.post('/createCity',upload.single('img'),async(req,res)=>{
