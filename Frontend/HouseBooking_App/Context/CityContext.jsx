@@ -12,6 +12,7 @@ const getCities = async (search) => {
 
     const response = await fetch(`http://localhost:5000/api/Cities?search=${search}`, {
       method: 'GET',
+      credentials:'include'
   
     })
     const res = await response.json()

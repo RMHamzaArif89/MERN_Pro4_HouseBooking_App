@@ -42,6 +42,10 @@ const Houses= new mongoose.Schema({
     },
     images:{
        type:[String]
+    },
+    city:{
+        type:Schema.Types.objectId,
+        ref:'cities'
     }
     
 

@@ -1,4 +1,4 @@
-equire('dotenv').config()
+require('dotenv').config()
 const express=require('express')
 const router=express.Router()
 const Users_Schema=require('../model/User_Schema')

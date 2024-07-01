@@ -23,6 +23,7 @@ function Nav() {
             <li><NavLink className='navlink' to="/createHouse">AddHouse</NavLink></li>
             <li><NavLink className='navlink' to="/register">Register</NavLink></li>
             <li><NavLink className='navlink' to="/login">Login</NavLink></li>
+            <li><NavLink className='logout' to="/logout">Logout</NavLink></li>
             
         </ul>
 

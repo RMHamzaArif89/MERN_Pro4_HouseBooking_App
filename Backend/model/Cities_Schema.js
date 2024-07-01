@@ -25,9 +25,12 @@ const Cities= new mongoose.Schema({
         // required:true
 
     },
-    houses:{
-        type:[String],
-    }
+    houses:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'houses'
+        }
+    ]
 
     
 

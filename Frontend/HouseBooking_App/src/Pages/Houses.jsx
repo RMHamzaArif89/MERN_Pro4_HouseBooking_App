@@ -51,6 +51,7 @@ try{
   
   const response = await fetch( `http://localhost:5000/api/houses?rooms=${values.max_rooms}&price=${values.max_price}&city=${values.city}`, {
     method: 'GET',
+    credentials:'include'
 
   })
   const res = await response.json()

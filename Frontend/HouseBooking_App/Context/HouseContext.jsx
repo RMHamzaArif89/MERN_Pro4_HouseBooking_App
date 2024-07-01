@@ -14,6 +14,7 @@ const getHouses = async (search) => {
 
     const response = await fetch(`http://localhost:5000/api/Houses`, {
       method: 'GET',
+    credentials:'include'
   
     })
     const res = await response.json()
@@ -36,6 +37,7 @@ const getHouses = async (search) => {
 
     const response = await fetch(`http://localhost:5000/api/House/${id}`, {
       method: 'GET',
+      credentials:'include'
   
     })
     const res = await response.json()
