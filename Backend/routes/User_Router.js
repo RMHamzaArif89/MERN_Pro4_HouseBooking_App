@@ -1,3 +1,4 @@
+equire('dotenv').config()
 const express=require('express')
 const router=express.Router()
 const Users_Schema=require('../model/User_Schema')
@@ -5,12 +6,15 @@ const bodyParser=require('body-parser')
 const bcrypt=require('bcryptjs')
 const multer=require('multer')
 const path=require('path')
-
+const jwt=require('jsonwebtoken')
+const cookieParser=require('cookie-parser')
 
 
 //this is middleWare use to encode the form&body request value //example req.body from form
 router.use(bodyParser.urlencoded({extended:false}));
 router.use(express.json())
+
+router.use(cookieParser())
 
 
 //for upload file
@@ -64,31 +68,79 @@ router.post('/createUser',async(req,res)=>{
 
 
 
-router.post('/loginUser',async(req,res)=>{
-//  console.log(req.file)
-   
-    try{
-      
-       const password=req.body.password
-       const email=req.body.email
-       const findUser= await Users_Schema.findOne({email})
-       const passwordMatch= await bcrypt.compare(password,findUser.password)
- 
-     if(passwordMatch && findUser){
-      // console.log('ok')
-      return res.status(200).json({msg:'find the user u r login'})
-      
-     }else{
-      console.log('not ok')
-     }
-        
-    }
-   
-    catch(err){
-    return  res.status(400).json({msg:'could not find the connection || data is wrong'})
-    }
-})
 
+
+router.post('/loginUser', async(req,res)=>{
+  // console.log('cookietoken',req.cookies.accessToken)
+  
+  try{
+    const email=req.body.email;
+    const password=req.body.password;
+    console.log('login',password)
+    if(!email ||  !password){
+      return  res.status(400).json('please fill the form feilds')
+    }
+    const data= await Users_Schema.findOne({email:email})
+    if(!data){
+      console.log('not find data')
+      return  res.status(400).json('invalid login details')
+    }
+  
+   
+    const passwordMatch= await bcrypt.compare(password,data.password)
+    const token=await data.generateToken()
+    const refreshToken= await data.generateRefreshToken()
+    const options= {
+      httpOnly:true,
+      secure:true,
+      maxAge:3000000,
+      sameSite:'strict'
+     }
+     if(!passwordMatch){
+      console.log('not match pwd')
+     }
+  
+   
+  
+    if(passwordMatch){
+        console.log('password match')
+        return res.status(200)
+        .cookie("accessToken", token, options)
+        .cookie("refreshToken",refreshToken,options)
+        .json({
+          id:data._id
+        })
+  // console.log('okay')
+        
+    }else{
+      return  res.status(400).json('invalid login details')
+        console.log('not okay')
+    }
+  }
+  catch(e){
+    res.status(400).send(e)
+  }
+    
+  })
+  
+  router.get('/logout', async(req,res)=>{
+    console.log('logout enter')
+    try{
+      const options= {
+        httpOnly:true,
+        secure:true,
+        maxAge:3000000,
+        sameSite:'strict'
+       }
+     res.status(200).clearCookie('accessToken',options)
+     .json('logout')
+     
+    }
+    catch(err){
+      res.status(400).json({msg:err})
+    }
+    
+  })
 
 
 

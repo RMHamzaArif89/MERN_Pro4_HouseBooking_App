@@ -33,8 +33,8 @@ const Users= new mongoose.Schema({
 //hash password using bcrypt
 Users.pre("save", async function(next){
     if(this.isModified('password')){
-        this.password= await bcrypt.hash(this.password,10)
-        // console.log(this.password)
+        this.password=  await bcrypt.hash(this.password,10)
+        console.log('bcrypt password',this.password)
     }
     next()
 })
@@ -49,13 +49,27 @@ Users.methods.generateToken=async function(){
         // if(this.include(token)){
         //     return 
         // }
-        const token=jwt.sign({_id:this._id},process.env.SECRET_KEY,{expiresIn:'60s'})
+        const token= jwt.sign({_id:this._id},process.env.TOKEN_SECRET_KEY, {expiresIn:'4m'})
         
         // this.tokens=this.tokens.concat({token})
-        // await this.save()
         return token
         
     
+    } catch{
+res.send('error occur')
+    }
+}
+//jsonwebtokengenerate
+Users.methods.generateRefreshToken= async function(){
+    try{
+        // if(this.include(token)){
+        //     return 
+        // }
+        const refreshToken = jwt.sign({_id:this._id},process.env.REFRESH_TOKEN_SECRET_KEY, {expiresIn:'5m'})
+        
+        // this.tokens=this.tokens.concat({refreshTtoken})
+        return refreshToken
+        
     } catch{
 res.send('error occur')
     }
