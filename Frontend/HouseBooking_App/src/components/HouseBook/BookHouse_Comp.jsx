@@ -16,6 +16,7 @@ function BookHouse_Comp() {
   const { setShowBooking } = useContext(HouseContext);
   // get the target element to toggle 
   let [openDateBox, setOpenDateBox] = useState(false)
+  const [totalPrice,setTotalPrice]=useState(0)
   let refOne = useRef()
 
 
@@ -47,12 +48,28 @@ function BookHouse_Comp() {
     )
 
   }
+
+  useEffect(()=>{
+    let Difference_In_Time =values.DateRange[0].endDate - values.DateRange[0].startDate;
+   
+    
+    // // Calculating the no. of days between two dates
+    let totalDays =
+    Math.round
+        (Difference_In_Time / (1000 * 3600 * 24));
+        setTotalPrice(totalDays * 100)
+
+  },[values.DateRange])
+
   //update data
   const handleSubmit = async (e) => {
 
-    // console.log(values)
-    e.preventDefault();
     console.log(values)
+    e.preventDefault();
+    // Calculating the time difference
+// of two dates
+
+   
     // try{
     // const response=await fetch(`http://localhost:5000/api/bookHouse`,{
     //   method:'POST',
@@ -87,14 +104,14 @@ function BookHouse_Comp() {
 
 
   useEffect(() => {
-    // event listeners
+   
     document.addEventListener("keydown", hideOnEscape, true)
     document.addEventListener("click", hideOnClickOutside, true)
   }, [])
 
-  // hide dropdown on ESC press
+
   const hideOnEscape = (e) => {
-    // console.log(e.key)
+ 
     if (e.key === "Escape") {
       setOpenDateBox(false)
     }
@@ -102,8 +119,7 @@ function BookHouse_Comp() {
 
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
-    // console.log(refOne.current)
-    // console.log(e.target)
+  
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpenDateBox(false)
     }
@@ -145,6 +161,9 @@ function BookHouse_Comp() {
             </div>
 
           </div>
+
+          <label>Total Price</label>
+          <input type="text" placeholder="Name" disabled name="totalPrice"  value={totalPrice} />
 
           <button type="submit">Book Now  </button>
         </form>

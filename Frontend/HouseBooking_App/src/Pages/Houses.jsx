@@ -12,7 +12,7 @@ function Houses() {
  
 
   useEffect(() => {
-
+getHouses()
   }, [])
 
 

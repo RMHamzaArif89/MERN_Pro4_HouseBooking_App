@@ -48,6 +48,7 @@ function CreateHouse() {
 
 
         try {
+            console.log('comm')
             
             const res = await axios.post(
                 "http://localhost:5000/api/createHouse",
@@ -72,6 +73,7 @@ function CreateHouse() {
             if (res.statusText == 'OK') {
                 navigate('/Houses')
             }
+           
 
 
 

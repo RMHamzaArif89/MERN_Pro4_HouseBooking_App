@@ -38,9 +38,9 @@ const upload = multer({ storage:Storage })
 
 
 
-router.post('/createHouse',upload.array("images",6),async(req,res)=>{
+router.post('/createHouse',upload.array("images",12),async(req,res)=>{
 
-
+console.log('house create')
    
     try{
 
