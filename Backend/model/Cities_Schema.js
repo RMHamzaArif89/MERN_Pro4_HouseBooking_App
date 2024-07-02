@@ -1,7 +1,7 @@
 //this collection will be use to find filter or search the products|data ...
 require('dotenv').config()
 const mongoose=require('mongoose')
-
+const Schema=mongoose.Schema
 
 const Cities= new mongoose.Schema({
     //these are the names of input...name='name'
@@ -28,7 +28,7 @@ const Cities= new mongoose.Schema({
     houses:[
         {
             type:Schema.Types.ObjectId,
-            ref:'houses'
+            ref:'Houses'
         }
     ]
 

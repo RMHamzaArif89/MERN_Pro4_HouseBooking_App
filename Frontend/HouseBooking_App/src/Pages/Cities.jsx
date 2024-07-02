@@ -1,5 +1,5 @@
 import React, { useState , useContext ,useEffect} from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData ,useNavigate} from 'react-router-dom'
 import './css/cities.css'
 import CityContext from '../../Context/CityContext'
 
@@ -10,6 +10,8 @@ function Cities() {
   useEffect(()=>{
      getCities(search)
   },[search])
+
+  const navigate=useNavigate()
 
 
   return (
@@ -37,7 +39,7 @@ function Cities() {
                <div className="name">{city.name}</div>
                 <div className="country">{city.country}</div>
                 <div className="detail">{city.detail}</div>
-                <div className="houses">Available Houses</div>
+                <div className="houses" onClick={()=>{navigate('/CityHouses')}}>Available Houses</div>
                </div>
               </div>
             )

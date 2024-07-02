@@ -32,7 +32,7 @@ function CreateHouse() {
 
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =async(e) => {
 
         e.preventDefault();
         const formData = new FormData()
@@ -48,7 +48,7 @@ function CreateHouse() {
 
 
         try {
-            console.log('comm')
+            
             
             const res = await axios.post(
                 "http://localhost:5000/api/createHouse",
@@ -69,9 +69,10 @@ function CreateHouse() {
                     city:''
 
                 })
-            )
-            console.log(res)
-            if (res.statusText == 'OK') {
+            ).then(res=>console.log(res))
+           
+            
+            if (res) {
                 navigate('/Houses')
             }
            

@@ -27,7 +27,7 @@
     outline: none;
     border: none;
     font-size: 1rem;
-    color: rgb(0, 208, 255);
+    color: white;
     font-family: serif;
     background:rgb(35, 149, 186);
 }
@@ -56,6 +56,7 @@
     border-radius: 8px;  
     position: relative; 
     box-shadow:3px 3px 3px 3px gray;
+    background: rgb(12, 93, 163);
 }.cities-card:hover{
     cursor: pointer;
     position: relative; 
@@ -75,7 +76,7 @@ background: #000;
     height: 40%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 .card-text .name{
@@ -84,18 +85,18 @@ background: #000;
     font-family: serif;
     margin: 0.4rem;
     padding: 4px;
-    background: red;
+    background: rgb(221, 110, 110);
     border-radius: 4px;
 }
 .card-text .country{
     color: blue;
     font-size: 1.2rem;
     font-family: sans-serif;
-    margin: 0.3rem;
+    /* margin: 0.3rem; */
 }
 .card-text .detail{
     font-size: 0.7rem;
-    color: gray;
+    color: rgb(250, 248, 248);
     font-family: sans-serif;
     text-align: center;
 }
@@ -108,6 +109,7 @@ background: #000;
     cursor: pointer;
 }
 .houses:hover{
-    background: gray;
+    background: rgb(5, 196, 5);
     cursor: pointer;
+    color: white;
 }

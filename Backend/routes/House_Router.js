@@ -14,6 +14,7 @@ const authUser=require('../authUser')
 router.use(bodyParser.urlencoded({extended:false}));
 router.use(express.json())
 
+router.use(authUser)
 
 //for upload file
 router.use(express.static('upload'))
@@ -34,7 +35,7 @@ const Storage = multer.diskStorage({
 const upload = multer({ storage:Storage })
 
 
-router.use(authUser)
+
 
 
 
@@ -46,7 +47,10 @@ console.log('house create')
     try{
 
 
-      
+  
+    //   const requireCity= await City_Schema.findOne({name:{$regex:req.body.city,$options:'i'}})
+    //  console.log('requireCity:',requireCity)
+
         const houses=new House_Schema({
             name:req.body.name,
             address:req.body.address,
@@ -58,26 +62,30 @@ console.log('house create')
             detail:req.body.detail,
             rentPerDay:req.body.rentPerDay,
             city:req.body.city
+            
         })
-     
+    
       
        const createHouse= await House_Schema.create(houses)
        
-      
-      
-        
+       
       
   
      if(createHouse){
-      await City_Schema.findOneAndUpdate({name:req.body.city},{
-        $push:{houses:createHouse._id}
-      })
-      return   res.status(200).json({msg:'Food Item has been created',data:houses})
-     }
+      await City_Schema.findOneAndUpdate({name:{$regex:req.body.city,$options:'i'}},{
+        $push:{houses:createHouse._id}})
+    
+    return   res.status(200).json({msg:'house has been created',data:houses})
+      }else{
+        return res.status(402).json({msg:'not created'})
+      }
+  
+     
         
     }
    
     catch(err){
+      console.log('error')
     return  res.status(400).json({msg:'could not find the connection || data is wrong'})
     }
 })

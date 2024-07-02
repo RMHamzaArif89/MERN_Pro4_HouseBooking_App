@@ -1,6 +1,7 @@
 //this collection will be use to find filter or search the products|data ...
 require('dotenv').config()
 const mongoose=require('mongoose')
+const Schema=mongoose.Schema;
 
 
 const Houses= new mongoose.Schema({
@@ -43,10 +44,6 @@ const Houses= new mongoose.Schema({
     images:{
        type:[String]
     },
-    city:{
-        type:Schema.Types.objectId,
-        ref:'cities'
-    }
     
 
 })
