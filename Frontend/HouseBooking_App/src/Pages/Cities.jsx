@@ -39,7 +39,7 @@ function Cities() {
                <div className="name">{city.name}</div>
                 <div className="country">{city.country}</div>
                 <div className="detail">{city.detail}</div>
-                <div className="houses" onClick={()=>{navigate('/CityHouses')}}>Available Houses</div>
+                <div className="houses" onClick={()=>{navigate(`/cityHouses/${city._id}`)}}>Available Houses</div>
                </div>
               </div>
             )

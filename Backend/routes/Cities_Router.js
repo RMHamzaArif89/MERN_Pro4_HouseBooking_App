@@ -123,6 +123,11 @@ router.get('/cities/:id',async(req,res)=>{
 
 
 
+
+
+
+
+
 //Delete the data by id
 router.delete('/deleteCity/:id',async(req,res)=>{
  try{
@@ -165,6 +170,35 @@ router.patch('/updateCity/:id',async(req,res)=>{
   })
  }
 })
+
+
+
+
+
+//cityHouses Data using populate
+//Get the single Data
+router.get('/cityHouses/:id',async(req,res)=>{
+ 
+  try{
+   const _id=req.params.id
+   console.log('id',_id)
+   let Data=await Cities_Schema.findById(_id).populate('houses')
+  
+   if(Data){
+    
+    return  res.status(200).json({data:Data.houses, msg:'find the single data of required item'})
+ 
+   }else{
+    return res.status(402).json({msg:'could not process the request'})
+   }
+     
+   
+  }
+  catch(e){
+   res.status(400).json({msg:'wrong information given'})
+  }
+ 
+ })
 
 
 

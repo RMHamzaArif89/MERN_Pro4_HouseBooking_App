@@ -23,6 +23,7 @@ import Houses from './Pages/Houses';
 import Cities from './Pages/Cities';
 import HouseDetail from './Pages/HouseDetail';
 import Logout from './Pages/Logout'
+import CityHouses from './Pages/CityHouses';
 
 
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route path="/cities" element={<Cities />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/houseDetail/:id" element={<HouseDetail />} />
+        <Route path="/cityHouses/:id" element={<CityHouses />} />
         
         
     

@@ -252,3 +252,17 @@
     background: lightcoral;
     color: black;
 }
+
+
+
+
+/* city house container */
+.city_House_Container{
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  gap: 1rem;
+  background: lightgreen;
+}
