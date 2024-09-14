@@ -29,10 +29,11 @@ function HouseDetail() {
     {
       showBooking && <BookHouse_Comp/>
     }
+
     {
       showImagesModal&& ReactDom.createPortal(
         <HouseImagesModal images={singleHouseData.images} setShowImagesModal={setShowImagesModal}/>,
-        document.querySelector('.modalPortal')
+         document.querySelector('.modalPortal')
       )
     }
     <div className="houseDetail-h1">Check Your Dream House to stay some time.</div>

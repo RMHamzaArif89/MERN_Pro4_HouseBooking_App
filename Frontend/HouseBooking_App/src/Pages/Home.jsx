@@ -1,9 +1,9 @@
 import React from 'react'
-
+import HomeImgSlider from '../components/HomeImgSlider'
 function Home() {
   return (
     <div>
-      Home
+      <HomeImgSlider/>
     </div>
   )
 }
