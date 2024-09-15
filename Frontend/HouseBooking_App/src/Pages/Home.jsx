@@ -1,9 +1,9 @@
 import React from 'react'
-import HomeImgSlider from '../components/HomeImgSlider'
+import ImgSlider from '../components/HomeImgSlider/ImgSlider'
 function Home() {
   return (
     <div>
-      <HomeImgSlider/>
+      <ImgSlider/>
     </div>
   )
 }

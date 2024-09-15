@@ -14,7 +14,7 @@ const authUser=require('../authUser')
 router.use(bodyParser.urlencoded({extended:false}));
 router.use(express.json())
 
-router.use(authUser)
+// router.use(authUser)
 
 //for upload file
 router.use(express.static('upload'))

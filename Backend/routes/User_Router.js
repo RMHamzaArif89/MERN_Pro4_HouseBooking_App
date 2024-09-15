@@ -108,7 +108,8 @@ router.post('/loginUser', async(req,res)=>{
         .cookie("accessToken", token, options)
         .cookie("refreshToken",refreshToken,options)
         .json({
-          id:data._id
+          id:data._id,
+          token:token
         })
   // console.log('okay')
         

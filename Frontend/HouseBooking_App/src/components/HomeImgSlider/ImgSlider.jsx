@@ -14,15 +14,15 @@ function ImgSlider() {
     const [loading, setLoading] = useState(false)
     let [val, setVal] = useState(0)
   
-    useEffect(() => {
-      const getHomeSlider = async () => {
-        const res = await axios.get(`http://localhost:5000/api/houses?rooms=${values.max_rooms}&price=${values.max_price}&city=${values.city}`);
-        setHomeSlider(res.data)
-      };
-      getHomeSlider();
+    // useEffect(() => {
+    //   const getHomeSlider = async () => {
+    //     const res = await axios.get('http://localhost:5001/api/homeSlider/getHomeSlider');
+    //     setHomeSlider(res.data.homeSlider)
+    //   };
+    //   getHomeSlider();
       
   
-    }, []);
+    // }, []);
   
   
 
@@ -71,7 +71,7 @@ function ImgSlider() {
         <div className='imgSlider'>
             {
                 homeSlider.length>0?(
-<ImgCon homeSlider={homeSlider.images[val]} />
+<ImgCon homeSlider={homeSlider[val].imgUrl} />
                 ): <div>...loading</div>
             }
             {/* {console.log(homeSlider[val])} */}

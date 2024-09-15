@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react'
 
 function ImgCon({homeSlider}) {
   // console.log(homeSlider)
- 
+//  
     const imgSliderStyle={
-        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(${homeSlider})`,
+        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(http://localhost:5000/${homeSlider})`,
         backgroundPosition:'center',
         backgroundSize:' 100% 100%',
     }

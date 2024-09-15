@@ -10,14 +10,14 @@ import {
   useLoaderData,
 
 } from "react-router-dom";
-import LayoutPage from './Pages/LayoutPage';
+import LayoutPage from './Pages/layout/LayoutPage';
+import AdminLayout from './Pages/layout/AdminLayout';
 import Home from './Pages/Home';
 import Login from './Pages/LoginForm/Form';
 import Register from './Pages/LoginForm/Register';
 import CreateCity from './Pages/LoginForm/CreateCities';
-import { UserLoader } from './Pages/Users';
+import {UserLoader} from './Pages/AdminPage/HomeOwners/HouseOwn'
 
-import Users from './Pages/Users';
 import CreateHouse from './Pages/LoginForm/CreateHouse'
 import Houses from './Pages/Houses';
 import Cities from './Pages/Cities';
@@ -27,28 +27,40 @@ import CityHouses from './Pages/CityHouses';
 
 
 
+//adminpages
+import AdminPage from './Pages/AdminPage/AdminPage'
+import HouseOwn from './Pages/AdminPage/HomeOwners/HouseOwn';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-  <Route  element={<LayoutPage/>}>
+  
+ <Route>
+ <Route  element={<LayoutPage/>}>
    
         
       
-        <Route path="/" index element={<Home />} />
-        <Route path="/register"  element={<Register />} />
-        <Route path="/login"  element={<Login />} />
-        <Route path="/createCity"  element={<CreateCity />} />
-        <Route path="/createHouse"  element={<CreateHouse />} />
-        <Route path="/users" element={<Users />} loader={UserLoader} />
-        <Route path="/houses" element={<Houses />} />
-        <Route path="/cities" element={<Cities />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/houseDetail/:id" element={<HouseDetail />} />
-        <Route path="/cityHouses/:id" element={<CityHouses />} />
-        
-        
-    
- 
-  </Route>  
+   <Route path="/" index element={<Home />} />
+   <Route path="/register"  element={<Register />} />
+   <Route path="/login"  element={<Login />} />
+   <Route path="/createCity"  element={<CreateCity />} />
+   <Route path="/createHouse"  element={<CreateHouse />} />
+  
+   <Route path="/houses" element={<Houses />} />
+   <Route path="/cities" element={<Cities />} />
+   <Route path="/logout" element={<Logout />} />
+   <Route path="/houseDetail/:id" element={<HouseDetail />} />
+   <Route path="/cityHouses/:id" element={<CityHouses />} />
+   
+   
+
+
+</Route> 
+<Route element={<AdminLayout />}>
+<Route path='/adminPage' element={<AdminPage/>}/>
+<Route path="/houseOwn" element={<HouseOwn />} loader={UserLoader} />
+</Route>
+ </Route>
+   
 ));
 function App() {
 

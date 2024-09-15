@@ -1,0 +1,36 @@
+.topBarAdmin{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    justify-content: space-between;
+    background: darkred;
+
+}
+.topBarAdmin .topBarHeading{
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto','sans-serif';
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+}
+.topBarAdmin .navMenu{
+    width: 2rem;
+    height:2rem;
+    object-fit: cover;
+    cursor: pointer;
+    animation: all .4s linear;
+}
+.topBarAdmin .navMenu:hover{
+    transform: scale(1.1);
+}
+.topBarAdmin .topBarUser{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.1rem;
+    color: white;
+}

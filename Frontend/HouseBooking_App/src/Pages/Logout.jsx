@@ -17,7 +17,7 @@ function Logout() {
     },
     credentials: 'include'  
 })
-console.log(response)
+
  if(response.ok){
   
 navigate("/login")
@@ -31,8 +31,13 @@ navigate("/login")
     console.log('logout error',e)
   }
 }
+const handleLogout = () => {
+  localStorage.removeItem('token'); // Remove token on logout
+  setIsAuthenticated(false);
+};
 useEffect(()=>{
 LogoutApi()
+handleLogout()
 },[])
 
   return (

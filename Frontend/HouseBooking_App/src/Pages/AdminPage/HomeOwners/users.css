@@ -1,0 +1,83 @@
+.users-container {
+    width: 100%;
+    min-height: 100vh;
+    max-height: auto;
+}
+
+.users-con {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.users-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.4rem;
+    background: rgb(22, 136, 174);
+    width: 80%;
+    font-size: 1.4rem;
+    color: white; /* Updated to match the background */
+    padding: .4rem;
+    border-radius: 0.4rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.users-heading:hover {
+    background-color: rgb(28, 161, 205); /* Lighter shade for hover */
+    color: #fff; /* Ensure text is readable on hover */
+}
+
+.users-row {
+    width: 80%;
+    min-height: 3.4rem;
+    max-height: 4.5rem;
+    background: lightblue;
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.users-row:hover {
+    background-color: #cce7ff; /* Lighter blue for hover */
+    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.users-heading .name,
+.users-heading .email,
+.users-heading .password {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Space between icon and text */
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.users-row .user-name,
+.users-row .user-email,
+.users-row .user-password {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+    cursor: pointer;
+}
+
+.users-row .user-name > svg,
+.users-row .user-email > svg,
+.users-row .user-password > svg {
+    font-size: 1.2rem; /* Adjust icon size */
+    color: black; /* Adjust icon color */
+    transition: color 0.3s ease;
+}
+
+.users-row:hover .user-name > svg,
+.users-row:hover .user-email > svg,
+.users-row:hover .user-password > svg {
+    color: #003d66; /* Darker color for icon on row hover */
+}

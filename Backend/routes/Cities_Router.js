@@ -37,7 +37,7 @@ const upload = multer({ storage:Storage })
 
 
 //authUser
-router.use(authUser)
+// router.use(authUser)
 
 
 router.post('/createCity',upload.single('img'),async(req,res)=>{
