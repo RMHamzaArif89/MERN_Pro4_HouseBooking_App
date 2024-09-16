@@ -157,6 +157,7 @@ router.get('/house/:id',async(req,res)=>{
 //Delete the data by id
 router.delete('/deleteHouse/:id',async(req,res)=>{
  try{
+  console.log('delete house')
   const _id=req.params.id
   
   await House_Schema.findByIdAndDelete({_id})

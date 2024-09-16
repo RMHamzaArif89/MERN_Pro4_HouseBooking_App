@@ -30,6 +30,7 @@ import CityHouses from './Pages/CityHouses';
 //adminpages
 import AdminPage from './Pages/AdminPage/AdminPage'
 import HouseOwn from './Pages/AdminPage/HomeOwners/HouseOwn';
+import AdminHousesPage from './Pages/AdminPage/AdminHousesPage/AdminHousesPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,6 +59,7 @@ const router = createBrowserRouter(
 <Route element={<AdminLayout />}>
 <Route path='/adminPage' element={<AdminPage/>}/>
 <Route path="/houseOwn" element={<HouseOwn />} loader={UserLoader} />
+<Route path='adminHousesPage' element={<AdminHousesPage/>}/>
 </Route>
  </Route>
    
