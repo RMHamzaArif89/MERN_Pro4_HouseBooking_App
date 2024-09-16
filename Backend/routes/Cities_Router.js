@@ -73,20 +73,28 @@ router.post('/createCity',upload.single('img'),async(req,res)=>{
 
 //Get the data
 router.get('/cities',async(req,res)=>{
-  
+  let Data;
   const search=req.query.search || ''
-  
+  const valueSearch=false;
   let searchQuery={}
   if(search !='' && search!= 'undefined'){
     searchQuery={name:{$regex:search,$options:'i'}}
+    valueSearch= true;
   }
  
   
  
  try{
-  let Data=await Cities_Schema.find(searchQuery)
+  if(valueSearch){
+    Data=await Cities_Schema.find(searchQuery)
+  }else{
+     Data=await Cities_Schema.find({})
+  }
+ 
   if(Data){
-   return  res.status(200).json({data:Data,msg:'Data has been collected from the backend'})
+   return  res.status(200).json({
+    Data,
+  });
 
   }
 

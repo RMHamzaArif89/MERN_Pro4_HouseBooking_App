@@ -43,12 +43,12 @@ flex-direction: column;
  
 
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: darkblue; 
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: lightgray; 
 }
 .cross-modal{
   font-size: 1.4rem;

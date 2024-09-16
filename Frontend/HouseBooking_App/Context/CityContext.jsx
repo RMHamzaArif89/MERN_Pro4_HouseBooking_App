@@ -12,14 +12,14 @@ const [cityHouseData,setCityHouseData]=useState([])
 //get orders data
 const getCities = async (search) => {
 
-    const response = await fetch(`http://localhost:5000/api/Cities?search=${search}`, {
+    const response = await fetch(`http://localhost:5000/api/cities?search=${search}`, {
       method: 'GET',
       credentials:'include'
   
     })
     const res = await response.json()
     if (response.ok) {
-      setCitiesData(res.data)
+      setCitiesData(res.Data)
       
    
   
@@ -46,7 +46,7 @@ console.log(id)
 
     const res = await response.json()
     if (response.ok) {
-      console.log(res.data)
+      // console.log(res.data)
       setCityHouseData(res.data)
       
    

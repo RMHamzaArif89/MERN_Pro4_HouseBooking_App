@@ -12,6 +12,7 @@ function SideBarAdmin() {
         <div className="sideBarAdminLinks">
             <NavLink to={'/houseOwn'} activeclassname='active'>House Owners</NavLink>
             <NavLink to={'/adminHousesPage'} activeclassname='active'>Houses</NavLink>
+            <NavLink to={'/adminCitiesPage'} activeclassname='active'>Cities</NavLink>
         </div>
       
     </div>

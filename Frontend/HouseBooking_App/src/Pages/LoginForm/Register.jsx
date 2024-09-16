@@ -56,7 +56,7 @@ function Register() {
                 
                 })
             ).then(
-                navigate('/users')
+                navigate('/houses')
             ).catch(console.log('err'))
           
 
