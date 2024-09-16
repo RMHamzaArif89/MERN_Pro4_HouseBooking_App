@@ -233,7 +233,7 @@
     padding: 4px;
 }
 .houses-detail{
-  width: 30%;
+  width: 50%;
   height: 90%;
   display: flex;
   align-items: center;
@@ -245,21 +245,28 @@
 
 .houses-rooms{
     font-size: 1.3rem;
-    color:blue;
+    color:rgb(13, 13, 151);
     font-family: serif;
 
 }
 .houses-price{
-  color: red;
+  color: gold;
   font-size: 1.3rem;
   font-weight: bold;
   font-family: sans-serif;
 }
+.houses-city{
+  font-size: 1rem;
+  font-family: sans-serif;
+  font-weight: bolder;
+  color: #056a3a;
+}
 .houses-address{
-  color:black;
+  color:darkblue;
   font-size: 1rem;
   font-weight: bold;
   font-family: sans-serif;
+  
 }
 .houses-moreDetail-btn{
   text-decoration: none;
@@ -274,6 +281,18 @@
 .houses-moreDetail-btn:hover{
     background: lightcoral;
     color: black;
+}
+.houses-unavailable{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: darkblue;
+  font-family: sans-serif;
+  
+}
+.houses-date{
+  font-size: 1rem;
+  color:gold;
+  font-family:sans-serif;
 }
 
 

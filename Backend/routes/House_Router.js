@@ -132,7 +132,7 @@ router.get('/houses',async(req,res)=>{
 
 //Get the single Data
 router.get('/house/:id',async(req,res)=>{
-  console.log('single house Data')
+  // console.log('single house Data')
  try{
   const _id=req.params.id
   let Data=await House_Schema.findById({_id})

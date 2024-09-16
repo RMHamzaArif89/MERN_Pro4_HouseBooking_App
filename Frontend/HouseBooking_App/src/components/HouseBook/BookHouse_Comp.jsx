@@ -1,155 +1,165 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-// import './order.css'
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import HouseContext from '../../../Context/HouseContext';
 import { ImCross } from "react-icons/im";
-import { useNavigate } from 'react-router-dom'
-import './bookHouseCom.css'
-import { DateRange, DateRangePicker } from 'react-date-range'
-import format from 'date-fns/format'
-import { addDays } from 'date-fns'
+import { useNavigate } from 'react-router-dom';
+import './bookHouseCom.css';
+import { DateRangePicker } from 'react-date-range';
+import format from 'date-fns/format';
+import { addDays } from 'date-fns';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
-
-
-function BookHouse_Comp() {
-  const { setShowBooking } = useContext(HouseContext);
-  // get the target element to toggle 
-  let [openDateBox, setOpenDateBox] = useState(false)
-  const [totalPrice,setTotalPrice]=useState(0)
-  let refOne = useRef()
-
-
+function BookHouse_Comp({ selectedHouseId ,pricePerDay,Data}) {
+  const { setShowBooking ,singleHouseData} = useContext(HouseContext);
+  let [openDateBox, setOpenDateBox] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  let refOne = useRef();
+// console.log(singleHouseData)
   const [values, setValues] = useState({
     name: '',
     email: '',
-    DateRange: ([
+    DateRange: [
       {
         startDate: new Date(),
         endDate: addDays(new Date(), 7),
-        key: 'selection'
-      }
-    ]),
-  })
+        key: 'selection',
+      },
+    ],
+    totalPrice:totalPrice
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    // e.preventDefault()
-
     let name = e.target.name;
     let val = e.target.value;
 
-    setValues((pre) =>
-    ({
-      ...pre, [name]: val
-    }
-    )
-    )
-
-  }
-
-  useEffect(()=>{
-    let Difference_In_Time =values.DateRange[0].endDate - values.DateRange[0].startDate;
-   
-    
-    // // Calculating the no. of days between two dates
-    let totalDays =
-    Math.round
-        (Difference_In_Time / (1000 * 3600 * 24));
-        setTotalPrice(totalDays * 100)
-
-  },[values.DateRange])
-
-  //update data
-  const handleSubmit = async (e) => {
-
-    console.log(values)
-    e.preventDefault();
-    // Calculating the time difference
-// of two dates
-
-   
-    // try{
-    // const response=await fetch(`http://localhost:5000/api/bookHouse`,{
-    //   method:'POST',
-    //   headers:{
-    // "Content-Type":'application/json'
-    //   },
-    //   body:JSON.stringify(values)
-    // })
-    // // console.log(response)
-    // if(response.ok){
-
-    // setValues({
-    //   name:'',
-    //   email:'',
-    //   DateRange:'',
-
-    // })
-    // console.log(response.data)
-    // navigate('/')
-    // }
-    //   }
-
-    // catch(e){
-    //   console.log('send error',e)
-    // }
-
-
-
-
-
-  }
-
+    setValues((pre) => ({
+      ...pre,
+      [name]: val,
+    }));
+  };
 
   useEffect(() => {
-   
-    document.addEventListener("keydown", hideOnEscape, true)
-    document.addEventListener("click", hideOnClickOutside, true)
-  }, [])
+    let Difference_In_Time = values.DateRange[0].endDate - values.DateRange[0].startDate;
 
+    // Calculating the number of days between two dates
+    let totalDays = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+    setTotalPrice(totalDays * singleHouseData.rentPerDay); // Assuming rent per day is 100
+  }, [values.DateRange]);
+
+  // Handle form submission (booking)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(values.totalPrice)
+      const response = await fetch(`http://localhost:5000/api/bookHouse`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": 'application/json',
+        },
+        body: JSON.stringify({
+          ...values,
+          houseId: selectedHouseId, // Pass selected house ID for booking
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSuccessMessage('House booked successfully!');
+        setErrorMessage('');
+        console.log('Booking data:', data);
+
+        // Reset form after successful booking
+        setValues({
+          name: '',
+          email: '',
+          DateRange: [
+            {
+              startDate: new Date(),
+              endDate: addDays(new Date(), 7),
+              key: 'selection',
+            },
+          ],
+        });
+
+        // Navigate to home or another page
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } else {
+        setErrorMessage('Booking failed. Please try again.');
+        setSuccessMessage('');
+      }
+    } catch (error) {
+      console.log('Booking error:', error);
+      setErrorMessage('Booking failed. Something went wrong.');
+      setSuccessMessage('');
+    }
+  };
+
+  // Hide the date range picker on Escape or outside click
+  useEffect(() => {
+    document.addEventListener("keydown", hideOnEscape, true);
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
 
   const hideOnEscape = (e) => {
- 
     if (e.key === "Escape") {
-      setOpenDateBox(false)
+      setOpenDateBox(false);
     }
-  }
+  };
 
-  // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
-  
     if (refOne.current && !refOne.current.contains(e.target)) {
-      setOpenDateBox(false)
+      setOpenDateBox(false);
     }
-  }
+  };
+
   return (
     <div className='order-form'>
-      <div className="cart-close" onClick={() => { setShowBooking(pre => !pre) }}><ImCross /></div>
+      <div className="cart-close" onClick={() => setShowBooking((pre) => !pre)}>
+        <ImCross />
+      </div>
 
       <div className="order-con">
-        <div className="brand-logo"></div>
         <div className="brand-title">RM Booking App</div>
         <form className="inputs" onSubmit={handleSubmit}>
           <label>EMAIL</label>
-          <input type="email" placeholder="@gmail.com" name="email" onChange={(e) => { handleChange(e) }} value={values.email} />
+          <input
+            type="email"
+            placeholder="@gmail.com"
+            name="email"
+            onChange={handleChange}
+            value={values.email}
+            required
+          />
+
           <label>Name</label>
-          <input type="text" placeholder="Name" name="name" onChange={(e) => { handleChange(e) }} value={values.name} />
-          {/* date range */}
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            onChange={handleChange}
+            value={values.name}
+            required
+          />
+
+          {/* Date range picker */}
           <div className="calendarWrap">
             <label>Select Date</label>
             <input
               value={`${format(values.DateRange[0].startDate, "MM/dd/yyyy")} to ${format(values.DateRange[0].endDate, "MM/dd/yyyy")}`}
               readOnly
               className="inputBox"
-              onClick={() => setOpenDateBox(pre => !pre)}
+              onClick={() => setOpenDateBox((pre) => !pre)}
             />
-            {/* {console.log(openDateBox)} */}
             <div ref={refOne}>
-              {openDateBox &&
+              {openDateBox && (
                 <DateRangePicker
-                  onChange={item => setValues({ 'DateRange': [item.selection] })}
+                  onChange={(item) => setValues({ ...values, DateRange: [item.selection] })}
                   editableDateInputs={true}
                   moveRangeOnFirstSelection={false}
                   ranges={values.DateRange}
@@ -157,22 +167,28 @@ function BookHouse_Comp() {
                   direction="horizontal"
                   className="calendarElement"
                 />
-              }
+              )}
             </div>
-
           </div>
 
           <label>Total Price</label>
-          <input type="text" placeholder="Name" disabled name="totalPrice"  value={totalPrice} />
+          <input
+            type="text"
+            placeholder="Total Price"
+            disabled
+            value={totalPrice}
+            
+          />
 
-          <button type="submit">Book Now  </button>
+          <button type="submit">Book Now</button>
+
+          {/* Success and error messages */}
+          {successMessage && <p className="successMessage">{successMessage}</p>}
+          {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         </form>
-
       </div>
-
     </div>
-  )
+  );
 }
 
-export default BookHouse_Comp
-
+export default BookHouse_Comp;

@@ -43,7 +43,7 @@ const getHouses = async (search) => {
     const res = await response.json()
 
     if (response.ok) {
-      console.log(res.data)
+      // console.log(res.data)
       setSingleHouseData(res.data)
       
    

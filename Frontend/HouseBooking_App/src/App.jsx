@@ -33,6 +33,7 @@ import AdminPage from './Pages/AdminPage/AdminPage'
 import HouseOwn from './Pages/AdminPage/HomeOwners/HouseOwn';
 import AdminHousesPage from './Pages/AdminPage/AdminHousesPage/AdminHousesPage';
 import AdminCitiesPage from './Pages/AdminPage/AdminCitiesPage/AdminCitiesPage';
+import AdminBookingList from './Pages/AdminPage/AdminBookingList/AdminBookingList'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
 <Route path="/houseOwn" element={<HouseOwn />} loader={UserLoader} />
 <Route path='adminHousesPage' element={<AdminHousesPage/>}/>
 <Route path='adminCitiesPage' element={<AdminCitiesPage/>}/>
+<Route path='adminBookingList' element={<AdminBookingList/>}/>
 </Route>
  </Route>
    

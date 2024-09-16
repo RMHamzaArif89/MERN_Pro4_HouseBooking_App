@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const Users=require('./routes/User_Router')
 const Cities=require('./routes/Cities_Router')
 const Houses=require('./routes/House_Router')
-
+const Booking=require('./routes/Booking_Router')
 
 
 var corsOptions = {
@@ -35,6 +35,7 @@ require('./db/conn.js')
 app.use('/api',Users)
 app.use('/api',Cities)
 app.use('/api',Houses)
+app.use('/api',Booking)
 
 app.listen(5000,()=>{
     console.log('port is listening')

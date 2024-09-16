@@ -13,9 +13,10 @@ function HouseDetail() {
     const {id} = useParams()
     const {getHouseDataById,singleHouseData,showBooking,setShowBooking}=useContext(HouseContext)
     const [showImagesModal,setShowImagesModal]=useState(false)
+    const [houseData,setHouseData]=useState([])
     useEffect(()=>{
-
-        getHouseDataById(id)
+      getHouseDataById(id)
+  
         
     },[id])
     
@@ -27,7 +28,7 @@ function HouseDetail() {
       Book Now <FaHome/>
     </div>
     {
-      showBooking && <BookHouse_Comp/>
+      showBooking && <BookHouse_Comp selectedHouseId={id} />
     }
 
     {
@@ -41,8 +42,9 @@ function HouseDetail() {
     <div className="houseDetail-h2">40% off</div>
     
  {
-  singleHouseData&&<HouseDetailCom Data={singleHouseData} 
-  setModal={setShowImagesModal}/>
+  singleHouseData&&<HouseDetailCom Data={singleHouseData}  
+  setModal={setShowImagesModal}
+  pricePerDay={houseData.rentPerDay}/>
      
   }
  

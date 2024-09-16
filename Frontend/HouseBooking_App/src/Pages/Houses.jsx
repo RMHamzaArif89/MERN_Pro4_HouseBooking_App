@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState, useContext } from 'react'
-import { useLoaderData,useNavigate,Link } from 'react-router-dom'
+import { useLoaderData, useNavigate, Link } from 'react-router-dom'
 import './css/houses.css'
 import axios from 'axios'
 import HouseContext from '../../Context/HouseContext.jsx'
@@ -8,11 +8,11 @@ import HouseContext from '../../Context/HouseContext.jsx'
 
 
 function Houses() {
-  const { getHouses, housesData ,setHousesData} = useContext(HouseContext)
- 
+  const { getHouses, housesData, setHousesData } = useContext(HouseContext)
+
 
   useEffect(() => {
-getHouses()
+    getHouses()
   }, [])
 
 
@@ -22,7 +22,7 @@ getHouses()
     city: '',
 
   })
-  
+
 
   const handleChange = (e) => {
 
@@ -45,31 +45,31 @@ getHouses()
 
     e.preventDefault();
 
-    
-   
-try{
-  
-  const response = await fetch( `http://localhost:5000/api/houses?rooms=${values.max_rooms}&price=${values.max_price}&city=${values.city}`, {
-    method: 'GET',
-    credentials:'include'
 
-  })
-  const res = await response.json()
-  if (response.ok) {
-    setHousesData(res.data)
-    
- 
 
-  }else{
-    console.log('false')
+    try {
+
+      const response = await fetch(`http://localhost:5000/api/houses?rooms=${values.max_rooms}&price=${values.max_price}&city=${values.city}`, {
+        method: 'GET',
+        credentials: 'include'
+
+      })
+      const res = await response.json()
+      if (response.ok) {
+        setHousesData(res.data)
+
+
+
+      } else {
+        console.log('false')
+      }
+
+    } catch (e) {
+      console.log(e)
+    }
   }
 
-}catch(e){
-  console.log(e)
-}
-}
-    
-  
+
   return (
     <>
       {/* {
@@ -85,12 +85,12 @@ try{
             <div className="form-heading">Find Your Dream House</div>
             <div className="form-row">
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" required/>
+                <input onChange={(e) => { handleChange(e) }} value={values.max_price} name="max_price" type="number" required />
                 <div className="underline"></div>
                 <label for="">MaximumpPrice</label>
               </div>
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number"  required/>
+                <input onChange={(e) => { handleChange(e) }} value={values.max_rooms} name="max_rooms" type="number" required />
                 <div className="underline"></div>
                 <label for="">Maximum Rooms</label>
               </div>
@@ -98,7 +98,7 @@ try{
 
             <div className="form-row">
               <div className="input-data">
-                <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" required/>
+                <input onChange={(e) => { handleChange(e) }} value={values.city} name="city" type="text" required />
                 <div className="underline"></div>
                 <label for="">City Location</label>
               </div>
@@ -134,10 +134,18 @@ try{
                       <div className="houses-price">Price:{house.rentPerDay}$</div>
                       <div className="houses-city">City:{house.city}</div>
                       <div className="houses-address">Address:{house.address}</div>
-                    
+                      <div className='houses-unavailable'>
+                        Unavailable Dates:
+                        {house.unavailableDate && house.unavailableDate.length > 0
+                          ? house.unavailableDate.map((date, index) => (
+                            <span className='houses-date' key={index}>{new Date(date).toLocaleDateString()}</span>
+                          )).reduce((prev, curr) => [prev, ', ', curr])
+                          : 'No unavailable dates'}
+                      </div>
+
                     </div>
                     <Link to={`/houseDetail/${house._id}`} className='houses-moreDetail-btn'>More Detail</Link>
-                   
+
                   </div>
                 )
               })
